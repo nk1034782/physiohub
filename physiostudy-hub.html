@@ -1,4 +1,988 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PhysioStudy Hub | Physiotherapy Learning Platform</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+font-family:Arial,sans-serif;
+background:#f5f8fa;
+color:#17212b;
+line-height:1.6
+}
+a{text-decoration:none;color:inherit}
+.container{width:min(1100px,92%);margin:auto}
+
+/* HEADER */
+header{
+position:sticky;top:0;z-index:1000;
+background:#fff;border-bottom:1px solid #e3eaed
+}
+.nav{
+min-height:68px;display:flex;align-items:center;
+justify-content:space-between
+}
+.logo{font-size:21px;font-weight:800;color:#123c52}
+.logo span{color:#08a6a6}
+.navlinks{display:flex;gap:20px}
+.navlinks a{font-size:14px;font-weight:bold;color:#40515c}
+.menu{display:none;border:0;background:none;font-size:28px}
+
+/* HERO */
+.hero{
+background:linear-gradient(135deg,#0c3042,#12606a);
+color:white;padding:75px 0
+}
+.hero-grid{
+display:grid;grid-template-columns:1.2fr .8fr;
+gap:40px;align-items:center
+}
+.badge{
+display:inline-block;padding:8px 14px;
+border-radius:30px;background:rgba(255,255,255,.12);
+margin-bottom:18px;font-size:13px
+}
+.hero h1{font-size:clamp(40px,7vw,65px);line-height:1.05}
+.hero h1 span{color:#5ee1d5}
+.hero p{color:#d7e7ea;font-size:17px;margin:20px 0 25px}
+.buttons{display:flex;gap:10px;flex-wrap:wrap}
+.btn{
+display:inline-block;padding:13px 19px;border-radius:10px;
+font-weight:bold;border:1px solid transparent
+}
+.primary{background:#20c4b5;color:#07323b}
+.outline{border-color:rgba(255,255,255,.4);color:white}
+
+.hero-card{
+background:rgba(255,255,255,.1);
+border:1px solid rgba(255,255,255,.2);
+border-radius:20px;padding:25px
+}
+.quick{
+display:block;padding:13px 0;
+border-bottom:1px solid rgba(255,255,255,.15)
+}
+
+/* SEARCH */
+.search-area{background:#fff;padding:20px 0;border-bottom:1px solid #e5ebee}
+.search input{
+width:100%;padding:15px;border:1px solid #d9e3e7;
+border-radius:12px;font-size:15px
+}
+
+/* SECTIONS */
+section{padding:65px 0}
+.title{text-align:center;max-width:700px;margin:0 auto 35px}
+.title small{
+color:#08a6a6;font-weight:bold;letter-spacing:1px
+}
+.title h2{font-size:34px;color:#123c52;margin:7px 0}
+.title p{color:#687982}
+
+.grid{
+display:grid;grid-template-columns:repeat(3,1fr);gap:20px
+}
+.card{
+background:white;border:1px solid #e0e8eb;
+border-radius:17px;padding:23px;
+box-shadow:0 8px 25px rgba(20,50,60,.05)
+}
+.card:hover{transform:translateY(-3px)}
+.icon{
+width:50px;height:50px;display:grid;place-items:center;
+background:#e5f8f6;border-radius:13px;font-size:24px;
+margin-bottom:15px
+}
+.card h3{color:#173f52;margin-bottom:8px}
+.card p{color:#687983;font-size:14px;margin-bottom:15px}
+.card a{color:#078f91;font-weight:bold}
+
+/* CLINICAL */
+.light{background:#edf8f7}
+.two{
+display:grid;grid-template-columns:1fr 1fr;gap:22px
+}
+.box{
+background:#fff;border:1px solid #dce8e9;
+border-radius:17px;padding:25px
+}
+.box h3{color:#123c52;margin-bottom:12px}
+.box li{margin:8px 0;color:#65757d;margin-left:20px}
+
+/* QUIZ */
+.quiz{background:#123c52;color:white}
+.quiz-box{max-width:750px;margin:auto}
+.quiz-box h2{text-align:center;font-size:34px}
+.quiz-box>p{text-align:center;color:#c9d9de;margin:8px 0 25px}
+.question{
+background:#fff;color:#17212b;border-radius:17px;padding:25px
+}
+.option{
+display:block;width:100%;text-align:left;
+padding:13px;margin:8px 0;
+border:1px solid #dce5e8;border-radius:9px;
+background:#f7fafb;cursor:pointer
+}
+.option:hover{border-color:#08a6a6}
+#result{font-weight:bold;margin-top:15px}
+
+/* PROFILE */
+.profile{background:#edf5f7}
+.profile-box{
+background:#fff;border-radius:20px;padding:30px;
+display:flex;gap:25px;align-items:center
+}
+.avatar{
+width:80px;height:80px;border-radius:50%;
+background:linear-gradient(135deg,#08a6a6,#123c52);
+color:#fff;display:grid;place-items:center;
+font-size:25px;font-weight:bold;flex-shrink:0
+}
+
+/* DISCLAIMER */
+.disclaimer{
+background:#fff4df;
+border:1px solid #efd49c;
+padding:20px;border-radius:14px;
+color:#68552c
+}
+
+/* FOOTER */
+footer{background:#092632;color:white;padding:40px 0}
+.footer-grid{
+display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px
+}
+footer p,footer a{color:#b9cbd0;font-size:14px}
+footer a{display:block;margin:6px 0}
+.copy{
+margin-top:25px;padding-top:18px;
+border-top:1px solid rgba(255,255,255,.15);
+font-size:13px;color:#9db4ba
+}
+
+/* MOBILE */
+@media(max-width:800px){
+.navlinks{display:none}
+.menu{display:block}
+.hero-grid{grid-template-columns:1fr}
+.grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+section{padding:50px 0}
+.hero{padding:60px 0}
+.grid,.two,.footer-grid{grid-template-columns:1fr}
+.hero h1{font-size:43px}
+.profile-box{flex-direction:column;text-align:center}
+.navlinks.show{
+display:flex;position:absolute;top:68px;left:0;right:0;
+background:white;padding:20px;flex-direction:column
+}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+<div class="container nav">
+
+<a class="logo" href="#home">
+🧠 Physio<span>Study</span> Hub
+</a>
+
+<nav class="navlinks" id="navLinks">
+<a href="#study">Study</a>
+<a href="#clinical">Clinical</a>
+<a href="#exercise">Exercises</a>
+<a href="#mcq">MCQ & Viva</a>
+<a href="#research">Research</a>
+<a href="#career">Career</a>
+</nav>
+
+<button class="menu" onclick="menu()">☰</button>
+
+</div>
+</header>
+
+
+<!-- HOME -->
+<section class="hero" id="home">
+<div class="container hero-grid">
+
+<div>
+
+<div class="badge">
+🩺 Physiotherapy Learning Platform
+</div>
+
+<h1>
+PhysioStudy<br>
+<span>Hub</span>
+</h1>
+
+<p>
+Learn • Assess • Treat • Research
+</p>
+
+<p>
+A practical learning and clinical reference hub
+for physiotherapy students, interns and professionals.
+</p>
+
+<div class="buttons">
+<a href="#study" class="btn primary">Start Learning</a>
+<a href="#mcq" class="btn outline">Practice MCQs</a>
+</div>
+
+</div>
+
+
+<div class="hero-card">
+
+<h3>⚡ Quick Access</h3>
+
+<a class="quick" href="#study">📚 Study Hub</a>
+<a class="quick" href="#clinical">🏥 Clinical Hub</a>
+<a class="quick" href="#exercise">🏃 Exercise Library</a>
+<a class="quick" href="#mcq">📝 MCQ & Viva</a>
+<a class="quick" href="#research">🔬 Research Hub</a>
+<a class="quick" href="#courses">🎓 Courses</a>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- SEARCH -->
+<div class="search-area">
+<div class="container">
+
+<input
+id="search"
+class="search"
+style="width:100%;padding:15px;border:1px solid #d9e3e7;border-radius:12px;font-size:15px"
+placeholder="🔎 Search anatomy, exercises, conditions, MCQs, research..."
+onkeyup="search()">
+
+</div>
+</div>
+
+
+<!-- STUDY HUB -->
+<section id="study">
+<div class="container">
+
+<div class="title">
+<small>01 • STUDY HUB</small>
+<h2>Build Your Physiotherapy Knowledge</h2>
+<p>
+Learn important subjects in a simple and organised way.
+</p>
+</div>
+
+<div class="grid searchable">
+
+<div class="card">
+<div class="icon">🦴</div>
+<h3>Anatomy</h3>
+<p>Bones, joints, muscles, nerves and clinical anatomy.</p>
+<a href="#" onclick="openTopic('Anatomy');return false">
+Explore Anatomy →
+</a>
+</div>
+
+<div class="card">
+<div class="icon">⚙️</div>
+<h3>Biomechanics</h3>
+<p>Movement, forces, levers and joint mechanics.</p>
+<a href="#" onclick="openTopic('Biomechanics');return false">
+Explore Biomechanics →
+</a>
+</div>
+
+<div class="card">
+<div class="icon">🧠</div>
+<h3>Physiology</h3>
+<p>Important physiological concepts for physiotherapy.</p>
+<a href="#" onclick="openTopic('Physiology');return false">
+Study Physiology →
+</a>
+</div>
+
+<div class="card">
+<div class="icon">⚡</div>
+<h3>Electrotherapy</h3>
+<p>Basic principles, applications and precautions.</p>
+<a href="#" onclick="openTopic('Electrotherapy');return false">
+Study Electrotherapy →
+</a>
+</div>
+
+<div class="card">
+<div class="icon">🏃</div>
+<h3>Exercise Therapy</h3>
+<p>Exercise principles and clinical applications.</p>
+<a href="#" onclick="openTopic('Exercise Therapy');return false">
+Explore Exercises →
+</a>
+</div>
+
+<div class="card">
+<div class="icon">🩻</div>
+<h3>Pathology</h3>
+<p>Common conditions relevant to physiotherapy.</p>
+<a href="#" onclick="openTopic('Pathology');return false">
+Study Pathology →
+</a>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- CLINICAL -->
+<section class="light" id="clinical">
+<div class="container">
+
+<div class="title">
+<small>02 • CLINICAL HUB</small>
+<h2>Assessment & Clinical Reasoning</h2>
+<p>Develop a structured approach to physiotherapy practice.</p>
+</div>
+
+<div class="two">
+
+<div class="box">
+<h3>🩺 Patient Assessment</h3>
+<ul>
+<li>Subjective assessment</li>
+<li>Objective examination</li>
+<li>Observation and palpation</li>
+<li>Range of motion</li>
+<li>Muscle strength testing</li>
+<li>Functional assessment</li>
+</ul>
+</div>
+
+<div class="box">
+<h3>🎯 Clinical Reasoning</h3>
+<ul>
+<li>Identify patient problems</li>
+<li>Set treatment goals</li>
+<li>Develop treatment plans</li>
+<li>Select interventions</li>
+<li>Monitor progress</li>
+<li>Reassess the patient</li>
+</ul>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- EXERCISE -->
+<section id="exercise">
+<div class="container">
+
+<div class="title">
+<small>03 • EXERCISE LIBRARY</small>
+<h2>Therapeutic Exercise Reference</h2>
+<p>Explore common exercise categories and learning points.</p>
+</div>
+
+<div class="grid searchable">
+
+<div class="card">
+<div class="icon">🦵</div>
+<h3>Strengthening</h3>
+<p>Learn basic principles of strengthening and progression.</p>
+<a href="#" onclick="openTopic('Strengthening');return false">
+View →
+</a>
+</div>
+
+<div class="card">
+<div class="icon">🤸</div>
+<h3>Stretching</h3>
+<p>Review flexibility and stretching principles.</p>
+<a href="#" onclick="openTopic('Stretching');return false">
+View →
+</a>
+</div>
+
+<div class="card">
+<div class="icon">⚖️</div>
+<h3>Balance Training</h3>
+<p>Study balance assessment and exercise progression.</p>
+<a href="#" onclick="openTopic('Balance Training');return false">
+View →
+</a>
+</div>
+
+<div class="card">
+<div class="icon">🫁</div>
+<h3>Breathing Exercises</h3>
+<p>Review basic respiratory exercise concepts.</p>
+<a href="#" onclick="openTopic('Breathing Exercises');return false">
+View →
+</a>
+</div>
+
+<div class="card">
+<div class="icon">🦶</div>
+<h3>Mobility</h3>
+<p>Study range-of-motion and mobility exercises.</p>
+<a href="#" onclick="openTopic('Mobility');return false">
+View →
+</a>
+</div>
+
+<div class="card">
+<div class="icon">🧘</div>
+<h3>Core Stability</h3>
+<p>Learn basic trunk and core stability concepts.</p>
+<a href="#" onclick="openTopic('Core Stability');return false">
+View →
+</a>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- MCQ -->
+<section class="quiz" id="mcq">
+<div class="container quiz-box">
+
+<h2>📝 MCQ & Viva Hub</h2>
+
+<p>
+Test your physiotherapy knowledge.
+</p>
+
+<div class="question">
+
+<h3 id="question">
+Which plane divides the body into right and left portions?
+</h3>
+
+<button class="option" onclick="quiz(false)">
+A. Frontal plane
+</button>
+
+<button class="option" onclick="quiz(true)">
+B. Sagittal plane
+</button>
+
+<button class="option" onclick="quiz(false)">
+C. Transverse plane
+</button>
+
+<button class="option" onclick="quiz(false)">
+D. Oblique plane
+</button>
+
+<div id="result"></div>
+
+</div>
+
+<br>
+
+<div class="two">
+
+<div class="box">
+<h3>🗣️ Viva Questions</h3>
+<p>
+Practice short-answer physiotherapy viva questions.
+</p>
+<a href="#" onclick="openTopic('Viva Questions');return false">
+Start Viva →
+</a>
+</div>
+
+<div class="box">
+<h3>💼 Interview Questions</h3>
+<p>
+Prepare for physiotherapy job interviews.
+</p>
+<a href="#" onclick="openTopic('Interview Questions');return false">
+Practice Interview →
+</a>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- RESEARCH -->
+<section id="research">
+<div class="container">
+
+<div class="title">
+<small>05 • RESEARCH HUB</small>
+<h2>Research & Evidence-Based Practice</h2>
+<p>Build your foundation in physiotherapy research.</p>
+</div>
+
+<div class="grid searchable">
+
+<div class="card">
+<div class="icon">🔬</div>
+<h3>Research Methodology</h3>
+<p>Research questions, study designs and methodology.</p>
+</div>
+
+<div class="card">
+<div class="icon">📊</div>
+<h3>Statistics</h3>
+<p>Understand basic statistical concepts used in research.</p>
+</div>
+
+<div class="card">
+<div class="icon">📑</div>
+<h3>Critical Appraisal</h3>
+<p>Learn how to evaluate research papers.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- COURSES -->
+<section class="light" id="courses">
+<div class="container">
+
+<div class="title">
+<small>06 • COURSES</small>
+<h2>Courses & Certificates</h2>
+<p>Organise your future physiotherapy learning resources.</p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<div class="icon">🎓</div>
+<h3>Physiotherapy Foundations</h3>
+<p>Foundation learning for physiotherapy students.</p>
+<span>Coming Soon</span>
+</div>
+
+<div class="card">
+<div class="icon">🩺</div>
+<h3>Clinical Assessment</h3>
+<p>Clinical assessment and reasoning resources.</p>
+<span>Coming Soon</span>
+</div>
+
+<div class="card">
+<div class="icon">🔬</div>
+<h3>Research Skills</h3>
+<p>Learn basic physiotherapy research skills.</p>
+<span>Coming Soon</span>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- CAREER -->
+<section id="career">
+<div class="container">
+
+<div class="title">
+<small>07 • CAREER HUB</small>
+<h2>Physiotherapy Career Development</h2>
+<p>Prepare for your professional journey.</p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<div class="icon">📄</div>
+<h3>CV & Resume</h3>
+<p>Learn how to present your education and clinical experience.</p>
+</div>
+
+<div class="card">
+<div class="icon">💼</div>
+<h3>Interview Preparation</h3>
+<p>Practice common physiotherapy interview questions.</p>
+</div>
+
+<div class="card">
+<div class="icon">🚀</div>
+<h3>Professional Development</h3>
+<p>Explore continuing learning and career development.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- PROFILE -->
+<section class="profile" id="profile">
+<div class="container">
+
+<div class="title">
+<small>08 • PROFILE</small>
+<h2>About PhysioStudy Hub</h2>
+</div>
+
+<div class="profile-box">
+
+<div class="avatar">NK</div>
+
+<div>
+<h3>Nantha Kumar</h3>
+<p>Physiotherapist · Creator of PhysioStudy Hub</p>
+
+<p style="margin-top:10px">
+PhysioStudy Hub is designed to organise physiotherapy
+learning, clinical education, research and career resources
+in one simple platform.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- DISCLAIMER -->
+<section>
+<div class="container">
+
+<div class="disclaimer">
+
+<h3>⚠️ Educational Disclaimer</h3>
+
+<p>
+This website is intended for educational purposes only.
+Clinical assessment and treatment decisions should be based
+on individual patient needs, professional clinical judgment,
+current evidence and applicable guidelines.
+</p>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+<div class="container">
+
+<div class="footer-grid">
+
+<div>
+<h3>🧠 PhysioStudy Hub</h3>
+<p>
+Learn • Assess • Treat • Research
+</p>
+</div>
+
+<div>
+<h3>Explore</h3>
+<a href="#study">Study Hub</a>
+<a href="#clinical">Clinical Hub</a>
+<a href="#exercise">Exercise Library</a>
+<a href="#mcq">MCQ & Viva</a>
+</div>
+
+<div>
+<h3>More</h3>
+<a href="#research">Research</a>
+<a href="#courses">Courses</a>
+<a href="#career">Career</a>
+<a href="#profile">Profile</a>
+</div>
+
+</div>
+
+<div class="copy">
+© 2026 PhysioStudy Hub · Educational Resource
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- TOPIC MODAL -->
+<div id="modal"
+style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.65);
+z-index:3000;
+align-items:center;
+justify-content:center;
+padding:20px;
+">
+
+<div style="
+background:white;
+width:min(650px,100%);
+max-height:85vh;
+overflow:auto;
+border-radius:20px;
+padding:30px;
+position:relative;
+">
+
+<button
+onclick="closeModal()"
+style="
+position:absolute;
+right:15px;
+top:15px;
+border:0;
+background:#edf5f7;
+border-radius:50%;
+width:38px;
+height:38px;
+font-size:20px;
+">
+×
+</button>
+
+<h2 id="modalTitle" style="color:#123c52"></h2>
+
+<p id="modalText" style="margin-top:12px;color:#60727b"></p>
+
+<ul id="modalList"
+style="margin:15px 0 0 20px;color:#60727b">
+</ul>
+
+</div>
+</div>
+
+
+<script>
+
+/* MOBILE MENU */
+function menu(){
+document.getElementById("navLinks").classList.toggle("show");
+}
+
+
+/* TOPIC CONTENT */
+const topics={
+
+"Anatomy":[
+"Human bones and joints",
+"Muscle attachments and actions",
+"Peripheral nerves",
+"Anatomical landmarks",
+"Clinical anatomy"
+],
+
+"Biomechanics":[
+"Planes and axes",
+"Levers",
+"Force and torque",
+"Centre of gravity",
+"Joint mechanics"
+],
+
+"Physiology":[
+"Muscle physiology",
+"Cardiovascular system",
+"Respiratory system",
+"Nervous system",
+"Exercise physiology"
+],
+
+"Electrotherapy":[
+"Basic electrical principles",
+"TENS",
+"Electrical stimulation",
+"Therapeutic currents",
+"Safety and precautions"
+],
+
+"Exercise Therapy":[
+"Range of motion",
+"Strengthening",
+"Stretching",
+"Balance training",
+"Functional exercises"
+],
+
+"Pathology":[
+"Musculoskeletal conditions",
+"Neurological conditions",
+"Cardiorespiratory conditions",
+"Inflammation",
+"Tissue healing"
+],
+
+"Strengthening":[
+"Isometric exercise",
+"Isotonic exercise",
+"Progressive resistance",
+"Repetition and sets",
+"Exercise progression"
+],
+
+"Stretching":[
+"Static stretching",
+"Dynamic stretching",
+"Flexibility principles",
+"Duration and frequency",
+"Precautions"
+],
+
+"Balance Training":[
+"Static balance",
+"Dynamic balance",
+"Weight shifting",
+"Functional balance",
+"Progression"
+],
+
+"Breathing Exercises":[
+"Diaphragmatic breathing",
+"Breathing control",
+"Thoracic expansion",
+"Positioning",
+"Patient education"
+],
+
+"Mobility":[
+"Active ROM",
+"Passive ROM",
+"Active-assisted ROM",
+"Joint mobility",
+"Functional mobility"
+],
+
+"Core Stability":[
+"Trunk activation",
+"Postural control",
+"Core endurance",
+"Progression",
+"Functional stability"
+],
+
+"Viva Questions":[
+"Define physiotherapy.",
+"Explain assessment.",
+"What is therapeutic exercise?",
+"What is ROM?",
+"What is muscle strength testing?"
+],
+
+"Interview Questions":[
+"Tell me about yourself.",
+"Why did you choose physiotherapy?",
+"What are your clinical strengths?",
+"How do you assess a patient?",
+"How do you communicate with patients?"
+]
+
+};
+
+
+function openTopic(name){
+
+const modal=document.getElementById("modal");
+
+document.getElementById("modalTitle").textContent="📚 "+name;
+
+document.getElementById("modalText").textContent=
+"Key learning areas:";
+
+const list=document.getElementById("modalList");
+
+list.innerHTML="";
+
+(topics[name] || ["Content will be added soon."])
+.forEach(function(item){
+
+const li=document.createElement("li");
+li.textContent=item;
+list.appendChild(li);
+
+});
+
+modal.style.display="flex";
+}
+
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
+
+/* QUIZ */
+function quiz(correct){
+
+const result=document.getElementById("result");
+
+if(correct){
+
+result.textContent=
+"✅ Correct! The sagittal plane divides the body into right and left portions.";
+
+result.style.color="#078b65";
+
+}else{
+
+result.textContent=
+"❌ Incorrect. Try again.";
+
+result.style.color="#c53b3b";
+
+}
+
+}
+
+
+/* SEARCH */
+function search(){
+
+const value=document
+.getElementById("search")
+.value
+.toLowerCase()
+.trim();
+
+document
+.querySelectorAll(".searchable .card")
+.forEach(function(card){
+
+const text=card.textContent.toLowerCase();
+
+card.style.display=
+text.includes(value) ? "" : "none";
+
+});
+
+}
+
+</script>
+
+</body>
+  </html>  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">

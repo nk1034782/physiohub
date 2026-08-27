@@ -1,0 +1,18 @@
+[
+  {
+    "id":"mcq1",
+    "category":"Anatomy",
+    "question":"Normal shoulder flexion ROM is approximately?",
+    "options":["0–90°","0–120°","0–180°","0–60°"],
+    "correct_index":2,
+    "explanation":"Shoulder flexion normal ROM is about 0–180°."
+  },
+  {
+    "id":"mcq2",
+    "category":"Neurology",
+    "question":"Which scale measures spasticity?",
+    "options":["Berg Balance Scale","Modified Ashworth Scale","MMSE","WOMAC"],
+    "correct_index":1,
+    "explanation":"Modified Ashworth Scale measures muscle spasticity."
+  }
+]

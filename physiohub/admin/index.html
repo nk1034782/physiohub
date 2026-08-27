@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Admin – PHYSIOHUB</title>
+  <link rel="stylesheet" href="/physiohub/assets/css/physiohub.css">
+</head>
+<body>
+  <main class="wrap">
+    <h2>PHYSIOHUB Admin (Demo)</h2>
+    <p class="lead">Admin UI skeleton. Authentication and real DB integration will be enabled after Supabase is connected.</p>
+
+    <section class="admin-box">
+      <h3>Demo Login</h3>
+      <p>This is a mock login UI. Once Supabase is configured this will perform real authentication.</p>
+      <form id="adminLogin">
+        <label>Email <input type="email" id="adminEmail"></label>
+        <label>Password <input type="password" id="adminPass"></label>
+        <button type="submit" class="btn btn-primary">Sign In (Demo)</button>
+      </form>
+    </section>
+
+    <section class="admin-box">
+      <h3>Content Management (Demo)</h3>
+      <p>Add / Edit / Delete forms will operate on in-memory sample data. After Supabase integration this UI will save to the database.</p>
+      <button id="demoAddCondition" class="btn">Add Demo Condition</button>
+    </section>
+  </main>
+
+  <script src="/physiohub/assets/js/physiohub.js"></script>
+</body>
+</html>

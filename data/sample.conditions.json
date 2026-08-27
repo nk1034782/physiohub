@@ -1,0 +1,34 @@
+[
+  {
+    "id":"stroke",
+    "slug":"stroke",
+    "title":"Stroke / Hemiplegia",
+    "category":"Neurological",
+    "body_region":"Brain",
+    "definition":"Acute neurological injury due to interruption of blood supply to part of the brain resulting in focal deficits.",
+    "causes":["Ischemic stroke","Hemorrhagic stroke"],
+    "clinicalFeatures":["Sudden unilateral weakness","Facial droop","Speech disturbance"],
+    "assessment":["NIHSS","Motor exam","Sensory exam","Fugl-Meyer"],
+    "physioGoals":["Improve mobility and safety","Increase independence in ADLs"],
+    "treatment":["Task-specific training","Gait training","Balance retraining"],
+    "exercises":["Sit-to-stand","Weight-shifting","Treadmill training"],
+    "precautions":["Monitor BP","Cardiac precautions"],
+    "references":["WHO Stroke fact sheet"],
+    "disclaimer":"This content is educational and not individualized medical advice."
+  },
+  {
+    "id":"acl-injury",
+    "slug":"acl-injury",
+    "title":"ACL Injury",
+    "category":"Orthopaedic",
+    "body_region":"Knee",
+    "definition":"Tear or sprain of the anterior cruciate ligament.",
+    "causes":["Pivoting injury","Contact sports"],
+    "clinicalFeatures":["Pain","Swelling","Instability"],
+    "assessment":["Lachman test","Anterior drawer"],
+    "treatment":["Rehabilitation post-op","Strengthening","Proprioception"],
+    "exercises":["Quadriceps sets","Closed-chain squats"],
+    "precautions":["Avoid deep twisting early"],
+    "references":[]
+  }
+]

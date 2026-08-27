@@ -1,0 +1,12 @@
+UPLOAD THESE TWO FILES TO THE SAME GITHUB FOLDER AS physiostudy-hub.html:
+
+anatomy-basics.html
+physiology-basics.html
+
+In physiostudy-hub.html, make the Anatomy link:
+<a href="anatomy-basics.html">Explore Anatomy →</a>
+
+Make the Physiology link:
+<a href="physiology-basics.html">Study Physiology →</a>
+
+Then Commit changes and refresh the website.

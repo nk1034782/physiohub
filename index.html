@@ -130,6 +130,89 @@
     position:absolute; inset:0;
     background:linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 60%, var(--navy-deep) 100%);
     z-index:0;
+    <div class="site-search">
+  <div class="wrap">
+    <input
+      type="search"
+      id="siteSearch"
+      placeholder="🔍 Search physiotherapy topics..."
+      aria-label="Search website"
+    >
+    <div id="searchResults"></div>
+  </div>
+</div>
+
+<style>
+.site-search {
+  background: var(--white);
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+#siteSearch {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  font-size: 15px;
+  outline: none;
+}
+
+#siteSearch:focus {
+  border-color: var(--teal);
+}
+
+#searchResults {
+  margin-top: 10px;
+}
+
+.search-result {
+  display: block;
+  padding: 10px 14px;
+  background: var(--off-white);
+  border-radius: 8px;
+  margin-top: 6px;
+}
+
+.search-result:hover {
+  background: #e8f5f4;
+}
+</style>
+
+<script>
+const searchBox = document.getElementById("siteSearch");
+const searchResults = document.getElementById("searchResults");
+
+searchBox.addEventListener("input", function () {
+  const query = this.value.toLowerCase().trim();
+  searchResults.innerHTML = "";
+
+  if (!query) return;
+
+  const sections = document.querySelectorAll("section");
+
+  sections.forEach(section => {
+    const text = section.innerText.toLowerCase();
+
+    if (text.includes(query)) {
+      const heading = section.querySelector("h1, h2, h3, h4");
+
+      if (heading) {
+        const result = document.createElement("a");
+        result.className = "search-result";
+        result.href = "#" + section.id;
+        result.textContent = "📖 " + heading.innerText;
+        searchResults.appendChild(result);
+      }
+    }
+  });
+
+  if (!searchResults.children.length) {
+    searchResults.innerHTML =
+      '<p style="padding:10px;">No topic found.</p>';
+  }
+});
+</script>
   }
   .gait-svg{position:absolute; left:0; right:0; bottom:-1px; width:100%; height:auto; z-index:1; opacity:0.9;}
   .hero .wrap{position:relative; z-index:2; display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center;}

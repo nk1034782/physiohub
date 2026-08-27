@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PhysioStudy Hub | Nantha Kumar — Physiotherapy Learning Platform</title>
+<meta name="description" content="PhysioStudy Hub — a physiotherapy education platform for students, interns and professionals. Study notes, clinical assessment, exercise library, MCQs, research and career resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,550;9..144,650&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B2E4E; --navy-deep:#081F38; --teal:#0E7C7B; --teal-light:#4FD1C5;
+    --off-white:#F6FAF9; --white:#FFFFFF; --slate:#4A5D68; --line:#DCE7E5;
+    --shadow: 0 20px 50px -20px rgba(11,46,78,0.18); --maxw: 1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:.001ms !important; transition-duration:.001ms !important;} }
+  body{margin:0; font-family:'Inter',sans-serif; color:var(--navy-deep); background:var(--off-white); -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+  h1,h2,h3,h4{font-family:'Fraunces',serif; font-weight:550; color:var(--navy-deep); margin:0; letter-spacing:-.01em;}
+  p{line-height:1.7; color:var(--slate); margin:0;}
+  a{text-decoration:none; color:inherit;}
+  img{max-width:100%; display:block;}
+  button{font-family:inherit;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+  .eyebrow::before{content:""; width:26px; height:1.5px; background:var(--teal-light); display:inline-block;}
+  section{padding:80px 0;}
+  .section-head{max-width:680px; margin-bottom:40px;}
+  .section-head h2{font-size:clamp(26px,3vw,36px); line-height:1.15;}
+  .section-head p{margin-top:14px; font-size:16px;}
+
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:999px; font-weight:600; font-size:14px; cursor:pointer; border:1.5px solid transparent; transition:transform .3s, box-shadow .3s, background .3s, color .3s, border-color .3s; white-space:nowrap;}
+  .btn-primary{background:var(--teal); color:#fff; box-shadow:0 12px 26px -10px rgba(14,124,123,.5);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border-color:var(--line); color:var(--navy-deep); background:#fff;}
+  .btn-ghost:hover{border-color:var(--teal); color:var(--teal); transform:translateY(-2px);}
+  .btn:disabled{opacity:.45; cursor:not-allowed; transform:none !important;}
+  .btn svg{width:14px;height:14px; flex-shrink:0;}
+
+  /* ---------- Nav ---------- */
+  header{position:fixed; top:0; left:0; right:0; z-index:1000; background:rgba(246,250,249,.9); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--line);}
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; height:72px; gap:16px;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-weight:600; font-size:17px; flex-shrink:0;}
+  .brand-mark{width:32px;height:32px; border-radius:8px; background:linear-gradient(150deg,var(--teal),var(--navy)); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:16px;}
+  .back-link{display:flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:var(--slate); flex-shrink:0;}
+  .back-link:hover{color:var(--teal);}
+  .back-link svg{width:14px;height:14px;}
+  .nav-links{display:flex; align-items:center; gap:20px; overflow-x:auto; scrollbar-width:none;}
+  .nav-links::-webkit-scrollbar{display:none;}
+  .nav-links a{font-size:13.5px; font-weight:500; white-space:nowrap; padding:4px 0; position:relative;}
+  .nav-links a::after{content:""; position:absolute; left:0; bottom:-2px; width:0; height:2px; background:var(--teal); transition:width .3s;}
+  .nav-links a:hover::after{width:100%;}
+  .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:6px;}
+  .burger span{width:22px;height:2px;background:var(--navy-deep);}
+
+  /* ---------- Hero ---------- */
+  .hub-hero{position:relative; padding:150px 0 70px; background:radial-gradient(1000px 550px at 80% -10%, rgba(79,209,197,.16), transparent 60%), var(--navy-deep); color:#fff; overflow:hidden;}
+  .hub-hero::before{content:""; position:absolute; inset:0; background:linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 60%, var(--navy-deep) 100%);}
+  .hub-hero .wrap{position:relative; z-index:2;}
+  .hub-badge{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--teal-light); display:inline-flex; align-items:center; gap:9px; padding:7px 15px 7px 7px; border:1px solid rgba(79,209,197,.35); border-radius:999px; background:rgba(79,209,197,.07); margin-bottom:22px;}
+  .hub-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--teal-light); animation:pulse 2.2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(79,209,197,.55);}50%{box-shadow:0 0 0 6px rgba(79,209,197,0);}}
+  .hub-hero h1{font-size:clamp(32px,4.4vw,50px); line-height:1.1; color:#fff; max-width:16ch;}
+  .hub-tagline{margin-top:18px; font-family:'Fraunces',serif; font-style:italic; font-size:19px; color:var(--teal-light); letter-spacing:.02em;}
+  .hub-hero p.sub{margin-top:16px; font-size:15.5px; color:rgba(255,255,255,.65); max-width:56ch;}
+
+  .search-box{margin-top:34px; max-width:520px; position:relative;}
+  .search-box input{
+    width:100%; padding:15px 18px 15px 46px; border-radius:999px; border:1.5px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.08); color:#fff; font-size:14.5px; font-family:'Inter',sans-serif;
+  }
+  .search-box input::placeholder{color:rgba(255,255,255,.5);}
+  .search-box input:focus{outline:none; border-color:var(--teal-light); background:rgba(255,255,255,.12);}
+  .search-box svg{position:absolute; left:17px; top:50%; transform:translateY(-50%); width:17px;height:17px; stroke:rgba(255,255,255,.55);}
+  #searchCount{margin-top:10px; font-size:12.5px; color:rgba(255,255,255,.5); display:none;}
+
+  .hub-quicknav{display:flex; gap:10px; flex-wrap:wrap; margin-top:32px;}
+  .hub-quicknav a{
+    font-size:13px; font-weight:600; padding:9px 16px; border-radius:999px; border:1px solid rgba(255,255,255,.18);
+    color:rgba(255,255,255,.85); transition:border-color .3s, background .3s;
+  }
+  .hub-quicknav a:hover{border-color:var(--teal-light); background:rgba(79,209,197,.1);}
+
+  /* ---------- Disclaimer ---------- */
+  .disclaimer{background:#FFF7E6; border-top:1px solid #F1D9A0; border-bottom:1px solid #F1D9A0;}
+  .disclaimer .wrap{display:flex; gap:14px; align-items:flex-start; padding:22px 28px;}
+  .disclaimer svg{width:20px;height:20px; stroke:#B7791F; flex-shrink:0; margin-top:2px;}
+  .disclaimer p{font-size:13.5px; color:#6B5215; line-height:1.6;}
+  .disclaimer b{color:#5A4210;}
+
+  /* ---------- Reveal ---------- */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- Section alternating bg ---------- */
+  .sec-white{background:var(--white);}
+  .sec-off{background:var(--off-white);}
+  .sec-navy{background:var(--navy-deep); color:#fff;}
+  .sec-navy .section-head h2{color:#fff;}
+  .sec-navy .section-head p{color:rgba(255,255,255,.62);}
+  .sec-navy .eyebrow{color:var(--teal-light);}
+
+  /* ---------- Topic cards (Study Hub / Clinical Hub) ---------- */
+  .topic-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  .topic-card{
+    background:#fff; border:1px solid var(--line); border-radius:14px; padding:22px 20px; cursor:pointer;
+    transition:transform .3s, box-shadow .3s, border-color .3s;
+  }
+  .topic-card:hover{transform:translateY(-4px); box-shadow:0 20px 40px -24px rgba(11,46,78,.28); border-color:var(--teal-light);}
+  .topic-card .ticon{font-size:26px; margin-bottom:12px; display:block;}
+  .topic-card b{font-size:14.5px; display:block;}
+  .topic-card .tdesc{font-size:12.5px; color:var(--slate); margin-top:8px; line-height:1.55; display:none;}
+  .topic-card .tnotes{font-size:12px; color:var(--teal); margin-top:10px; font-weight:600; display:none; padding-top:10px; border-top:1px dashed var(--line);}
+  .topic-card.open .tdesc, .topic-card.open .tnotes{display:block;}
+  .topic-card .texpand{font-size:11.5px; color:var(--teal); font-weight:600; margin-top:10px; display:flex; align-items:center; gap:4px;}
+  .topic-card .texpand svg{width:11px;height:11px; transition:transform .3s;}
+  .topic-card.open .texpand svg{transform:rotate(180deg);}
+
+  /* ---------- Search hide ---------- */
+  .hub-hidden{display:none !important;}
+
+  /* ---------- Exercise Library ---------- */
+  .filter-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px;}
+  .filter-btn{
+    font-size:13px; font-weight:600; padding:9px 16px; border-radius:999px; border:1.5px solid var(--line);
+    background:#fff; color:var(--navy-deep); cursor:pointer; transition:border-color .3s, background .3s, color .3s;
+  }
+  .filter-btn:hover{border-color:var(--teal-light);}
+  .filter-btn.active{background:var(--teal); border-color:var(--teal); color:#fff;}
+  .exercise-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  .exercise-card{background:#fff; border:1px solid var(--line); border-radius:16px; padding:26px 28px; box-shadow:0 14px 34px -26px rgba(11,46,78,.25);}
+  .exercise-card .ex-tag{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--teal); background:rgba(14,124,123,.08); padding:5px 11px; border-radius:999px; display:inline-block; margin-bottom:12px;}
+  .exercise-card h3{font-size:17.5px; line-height:1.3;}
+  .ex-field{margin-top:14px;}
+  .ex-field b{font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--navy); display:block; margin-bottom:4px;}
+  .ex-field span{font-size:13.5px; color:var(--slate); line-height:1.6;}
+
+  /* ---------- MCQ Quiz ---------- */
+  .quiz-cats{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px;}
+  .quiz-panel{background:#fff; border:1px solid var(--line); border-radius:20px; padding:36px; box-shadow:var(--shadow); max-width:700px;}
+  .quiz-empty{color:var(--slate); font-size:14.5px; text-align:center; padding:40px 0;}
+  .quiz-progress{display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; font-size:12.5px; color:var(--slate); font-weight:600;}
+  .quiz-score{color:var(--teal);}
+  .quiz-question{font-size:17px; font-weight:600; color:var(--navy-deep); margin-bottom:20px; line-height:1.4;}
+  .quiz-options{display:flex; flex-direction:column; gap:10px;}
+  .quiz-option{
+    text-align:left; padding:13px 16px; border-radius:10px; border:1.5px solid var(--line); background:var(--off-white);
+    font-size:14px; cursor:pointer; transition:border-color .25s, background .25s;
+  }
+  .quiz-option:hover{border-color:var(--teal-light);}
+  .quiz-option.correct{border-color:#2F9E5C; background:#E9F9EF; color:#1F7A44; font-weight:600;}
+  .quiz-option.incorrect{border-color:#D9534F; background:#FDECEC; color:#B3362F; font-weight:600;}
+  .quiz-option:disabled{cursor:default;}
+  .quiz-feedback{margin-top:16px; font-size:13.5px; padding:14px 16px; border-radius:10px; background:var(--off-white); display:none;}
+  .quiz-feedback.show{display:block;}
+  .quiz-actions{display:flex; justify-content:space-between; align-items:center; margin-top:24px;}
+
+  /* ---------- Viva / Interview lists ---------- */
+  .qa-list{display:flex; flex-direction:column; gap:12px;}
+  .qa-item{background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px 20px;}
+  .qa-item b{font-size:14px; display:block;}
+  .qa-item span{font-size:12.5px; color:var(--teal); margin-top:6px; display:block; font-weight:600;}
+  .qa-cols{display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:40px;}
+  .qa-colhead{font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--navy-deep); margin-bottom:16px;}
+
+  /* ---------- Research reference grid ---------- */
+  .research-ref-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .research-ref-card{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); border-radius:14px; padding:22px;}
+  .research-ref-card h4{color:#fff; font-size:14.5px; margin-bottom:12px;}
+  .research-ref-card ul{margin:0; padding-left:18px;}
+  .research-ref-card li{font-size:12.5px; color:rgba(255,255,255,.62); margin-bottom:6px; line-height:1.5;}
+  .research-project-card{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); border-radius:16px; padding:28px 30px; margin-top:36px;}
+  .research-project-card .rp-tag{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--teal-light); margin-bottom:12px; display:block;}
+  .research-project-card h3{color:#fff; font-size:18px; line-height:1.4;}
+  .research-project-card p{color:rgba(255,255,255,.62); font-size:13.5px; margin-top:12px;}
+  .add-project-card{
+    margin-top:20px; border:1.5px dashed rgba(255,255,255,.25); border-radius:16px; padding:24px 28px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .add-project-card svg{width:22px;height:22px; stroke:var(--teal-light); flex-shrink:0;}
+  .add-project-card p{color:rgba(255,255,255,.6); font-size:13px;}
+
+  /* ---------- Courses ---------- */
+  .course-tabs{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px;}
+  .course-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .course-card{background:#fff; border:1px solid var(--line); border-radius:16px; padding:24px 22px; display:flex; flex-direction:column; gap:8px; box-shadow:0 14px 34px -26px rgba(11,46,78,.25);}
+  .course-card .ctype{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--teal); background:rgba(14,124,123,.08); padding:5px 11px; border-radius:999px; display:inline-block; width:fit-content;}
+  .course-card b{font-size:15px; margin-top:6px;}
+  .course-card .cprovider{font-size:12.5px; color:var(--teal); font-weight:600;}
+  .course-card .cdesc{font-size:12.5px; color:var(--slate); line-height:1.55;}
+  .course-card .cdate{font-size:11.5px; color:var(--slate); margin-top:2px;}
+  .course-card .cactions{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;}
+  .course-card .cactions .btn{padding:8px 14px; font-size:12px;}
+  .course-card.template{border-style:dashed; opacity:.75;}
+
+  /* ---------- Career ---------- */
+  .career-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .career-card{background:#fff; border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:0 14px 34px -26px rgba(11,46,78,.25);}
+  .career-card .cicon{font-size:26px; margin-bottom:12px; display:block;}
+  .career-card b{font-size:15px; display:block;}
+  .career-card p{font-size:13px; margin-top:8px;}
+  .career-card a.btn{margin-top:14px;}
+
+  /* ---------- Profile summary ---------- */
+  .profile-card{
+    background:var(--off-white); border:1px solid var(--line); border-radius:20px; padding:40px; display:flex; gap:32px; align-items:flex-start; flex-wrap:wrap;
+  }
+  .profile-avatar{width:76px;height:76px; border-radius:50%; background:linear-gradient(150deg,var(--teal),var(--navy)); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Fraunces',serif; font-size:26px; flex-shrink:0;}
+  .profile-links{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:22px;}
+  .profile-links a{
+    display:flex; align-items:center; gap:10px; font-size:13.5px; font-weight:600; padding:12px 16px; border-radius:10px; background:#fff; border:1px solid var(--line); transition:border-color .3s, color .3s;
+  }
+  .profile-links a:hover{border-color:var(--teal); color:var(--teal);}
+  .profile-links svg{width:16px;height:16px; stroke:var(--teal); flex-shrink:0;}
+  .profile-contact-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;}
+
+  footer{background:var(--navy-deep); color:rgba(255,255,255,.55); padding:40px 0;}
+  footer .wrap{display:flex; flex-direction:column; gap:16px;}
+  footer .fdisclaim{font-size:12.5px; line-height:1.7; color:rgba(255,255,255,.5); border-top:1px solid rgba(255,255,255,.1); padding-top:20px;}
+  footer .frow{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
+  footer .fbrand{color:#fff; font-family:'Fraunces',serif; font-size:15px;}
+
+  :focus-visible{outline:2.5px solid var(--teal); outline-offset:3px;}
+
+  @media (max-width:1020px){
+    .topic-grid{grid-template-columns:repeat(3,1fr);}
+    .exercise-grid{grid-template-columns:1fr;}
+    .research-ref-grid{grid-template-columns:1fr 1fr;}
+    .course-grid{grid-template-columns:1fr 1fr;}
+    .career-grid{grid-template-columns:1fr 1fr;}
+    .qa-cols{grid-template-columns:1fr;}
+    .profile-links{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:720px){
+    section{padding:56px 0;}
+    .nav-links{position:fixed; top:70px; left:0; right:0; background:#fff; flex-direction:column; align-items:flex-start; padding:20px 24px; gap:16px; border-bottom:1px solid var(--line); transform:translateY(-130%); transition:transform .35s; box-shadow:0 20px 30px -20px rgba(11,46,78,.2); overflow-x:visible;}
+    .nav-links.open{transform:translateY(0);}
+    .burger{display:flex;}
+    .back-link span{display:none;}
+    .topic-grid{grid-template-columns:1fr 1fr;}
+    .research-ref-grid{grid-template-columns:1fr;}
+    .course-grid{grid-template-columns:1fr;}
+    .career-grid{grid-template-columns:1fr;}
+    .profile-links{grid-template-columns:1fr;}
+    .profile-card{padding:26px;}
+    .quiz-panel{padding:24px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="hubHeader">
+  <nav class="wrap">
+    <a href="index.html#home" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span>Back to Portfolio</span>
+    </a>
+    <a href="#top" class="brand">
+      <span class="brand-mark">🧠</span>
+      PhysioStudy Hub
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#study">Study Hub</a>
+      <a href="#clinical">Clinical Hub</a>
+      <a href="#exercises">Exercise Library</a>
+      <a href="#mcq">MCQ & Viva</a>
+      <a href="#research">Research Hub</a>
+      <a href="#courses">Courses</a>
+      <a href="#career">Career Hub</a>
+      <a href="#profile">My Profile</a>
+    </div>
+    <button class="burger" id="burgerBtn" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hub-hero" id="top">
+  <div class="wrap">
+    <span class="hub-badge"><span class="dot"></span>Physiotherapy Learning Platform</span>
+    <h1>PhysioStudy Hub</h1>
+    <p class="hub-tagline">Learn • Assess • Treat • Research</p>
+    <p class="sub">A study and reference platform for physiotherapy students, interns and professionals — built and maintained by Nantha Kumar as part of his professional portfolio.</p>
+
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" id="hubSearch" placeholder="Search topics, exercises, MCQs, courses…">
+    </div>
+    <div id="searchCount"></div>
+
+    <div class="hub-quicknav">
+      <a href="#study">📚 Study Hub</a>
+      <a href="#clinical">🏥 Clinical Hub</a>
+      <a href="#exercises">🏃 Exercise Library</a>
+      <a href="#mcq">📝 MCQ & Viva Hub</a>
+      <a href="#research">🔬 Research Hub</a>
+      <a href="#courses">🎓 Courses & Certificates</a>
+      <a href="#career">💼 Career Hub</a>
+      <a href="#profile">👨‍⚕️ My Profile</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DISCLAIMER ============ -->
+<div class="disclaimer">
+  <div class="wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4M12 17h.01"/></svg>
+    <p><b>Educational Disclaimer:</b> PhysioStudy Hub is intended for educational and professional learning purposes. Clinical assessment and treatment decisions should be based on individual patient needs, professional clinical judgment, current evidence and applicable guidelines.</p>
+  </div>
+</div>
+
+<!-- ============ 1. STUDY HUB ============ -->
+<section class="sec-white" id="study">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">📚 Study Hub</div>
+      <h2>Core physiotherapy subjects</h2>
+      <p>Click any topic to expand it. Add your own notes to each subject by editing <code>assets/js/hub-data.js</code>.</p>
+    </div>
+    <div class="topic-grid" id="studyGrid" data-search-group="study"></div>
+  </div>
+</section>
+
+<!-- ============ 2. CLINICAL HUB ============ -->
+<section class="sec-off" id="clinical">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">🏥 Clinical Hub</div>
+      <h2>Assessment & clinical reasoning</h2>
+      <p>Core clinical skills used in day-to-day physiotherapy assessment and decision-making.</p>
+    </div>
+    <div class="topic-grid" id="clinicalGrid" data-search-group="clinical"></div>
+  </div>
+</section>
+
+<!-- ============ 3. EXERCISE LIBRARY ============ -->
+<section class="sec-white" id="exercises">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">🏃 Exercise Library</div>
+      <h2>Reference exercise templates</h2>
+      <p>Each entry follows a consistent clinical format — purpose, position, procedure, dosage, precautions and application. Filter by category or add new exercises in the data file.</p>
+    </div>
+    <div class="filter-row" id="exFilters"></div>
+    <div class="exercise-grid" id="exerciseGrid"></div>
+  </div>
+</section>
+
+<!-- ============ 4. MCQ & VIVA HUB ============ -->
+<section class="sec-off" id="mcq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">📝 MCQ & Viva Hub</div>
+      <h2>Test your knowledge</h2>
+      <p>Pick a category to start an interactive quiz — instant feedback, running score, and a next-question button.</p>
+    </div>
+    <div class="quiz-cats" id="quizCats"></div>
+    <div class="quiz-panel" id="quizPanel">
+      <div class="quiz-empty">Select a category above to begin a quiz.</div>
+    </div>
+
+    <div class="qa-cols">
+      <div>
+        <div class="qa-colhead">🗣️ Viva Questions</div>
+        <div class="qa-list" id="vivaList"></div>
+      </div>
+      <div>
+        <div class="qa-colhead">💼 Physiotherapy Interview Questions</div>
+        <div class="qa-list" id="interviewList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. RESEARCH HUB ============ -->
+<section class="sec-navy" id="research">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">🔬 Research Hub</div>
+      <h2>Research foundations & your projects</h2>
+      <p>Reference material for approaching physiotherapy research, alongside a space for your own projects.</p>
+    </div>
+    <div class="research-ref-grid" id="researchRefGrid"></div>
+
+    <div class="research-project-card reveal">
+      <span class="rp-tag">My Research Project</span>
+      <h3>Effect of Neurodynamic Mobilization of Femoral Nerve vs Post Isometric Relaxation on Pulmonary Function and Flexibility in Desk Workers with Iliopsoas Muscle Tightness</h3>
+      <p>Duration: 6 months. A comparative study using neurodynamic mobilization and post-isometric relaxation, with outcome measures including the Modified Thomas Test, Modified Ober Test, goniometry and pulmonary function tests. Experience gained in research methodology, data collection, analysis and interpretation.</p>
+    </div>
+
+    <div class="add-project-card reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+      <p>Add a new research project anytime by editing the Research Hub section in <code style="color:var(--teal-light)">physiostudy-hub.html</code>, or send me the details and I'll add it here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. COURSES & CERTIFICATES ============ -->
+<section class="sec-white" id="courses">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">🎓 Courses & Certificates</div>
+      <h2>Completed courses & credentials</h2>
+      <p>Filter by type. Real, completed courses are shown below — add new ones in <code>assets/js/hub-data.js</code>.</p>
+    </div>
+    <div class="course-tabs" id="courseTabs"></div>
+    <div class="course-grid" id="courseGrid"></div>
+  </div>
+</section>
+
+<!-- ============ 7. CAREER HUB ============ -->
+<section class="sec-off" id="career">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">💼 Career Hub</div>
+      <h2>Career resources</h2>
+      <p>Practical starting points for jobs, internships and next steps toward MPT.</p>
+    </div>
+    <div class="career-grid" id="careerGrid"></div>
+  </div>
+</section>
+
+<!-- ============ 8. MY PROFESSIONAL PROFILE ============ -->
+<section class="sec-white" id="profile">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">👨‍⚕️ My Professional Profile</div>
+      <h2>Nantha Kumar — Physiotherapist</h2>
+      <p>PhysioStudy Hub is part of my professional portfolio. My full profile — About, Education, Clinical Experience, Certificates, Research and Contact — lives on the main portfolio site.</p>
+    </div>
+    <div class="profile-card reveal">
+      <div class="profile-avatar">NK</div>
+      <div style="flex:1; min-width:260px;">
+        <h3 style="font-size:20px;">Nantha Kumar</h3>
+        <p style="margin-top:4px; font-size:13.5px; color:var(--teal); font-weight:600;">BPT · Physiotherapist · Neurorehabilitation Enthusiast</p>
+        <div class="profile-links">
+          <a href="index.html#about"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>About Me</a>
+          <a href="index.html#education"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Education</a>
+          <a href="index.html#experience"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Clinical Experience</a>
+          <a href="index.html#certificates"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg>Certificates</a>
+          <a href="index.html#research"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Research</a>
+          <a href="index.html#contact"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Contact</a>
+        </div>
+        <div class="profile-contact-row">
+          <a href="https://www.linkedin.com/in/nantha-kumar-9715973a3" target="_blank" rel="noopener" class="btn btn-ghost">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2h11l5 5v15H4zM15 2v5h5"/></svg>
+            LinkedIn
+          </a>
+          <a href="mailto:nk6380121781@gmail.com" class="btn btn-ghost">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            Email
+          </a>
+          <a href="index.html#cv" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg>
+            View Full Portfolio & CV
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="frow">
+      <span class="fbrand">PhysioStudy Hub — by Nantha Kumar</span>
+      <a href="index.html#home" class="btn btn-ghost" style="background:transparent; border-color:rgba(255,255,255,.2); color:#fff;">← Back to Portfolio</a>
+    </div>
+    <p class="fdisclaim"><b>Educational Disclaimer:</b> PhysioStudy Hub is intended for educational and professional learning purposes. Clinical assessment and treatment decisions should be based on individual patient needs, professional clinical judgment, current evidence and applicable guidelines.</p>
+  </div>
+</footer>
+
+<script src="assets/js/hub-data.js"></script>
+<script src="assets/js/hub-app.js"></script>
+</body>
+</html>
